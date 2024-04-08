@@ -199,3 +199,9 @@ except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     print(exc_type, fname, exc_tb.tb_lineno)
+
+def main(handler):
+    handler.send_response(HTTPStatus.OK)
+    handler.end_headers()
+    msg = 'Hello from sample.py! You requested %s' % handler.path
+    handler.wfile.write(msg.encode())
