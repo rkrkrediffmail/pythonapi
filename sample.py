@@ -20,7 +20,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 import pandas as pd
 from psycopg2 import sql
-from environments import s3, connection, bucket, tempfolder,
+from environments import s3, connection, bucket, tempfolder
 import cgi
 import nltk
 from dotenv import load_dotenv
