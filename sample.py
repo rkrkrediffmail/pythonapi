@@ -20,7 +20,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 import pandas as pd
 from psycopg2 import sql
-from environments import s3, connection, bucket, tempfolder, connection, euname, pval, msg, mailServer, MIMEText
+from environments import s3, connection, bucket, tempfolder,
 import cgi
 import nltk
 from dotenv import load_dotenv
@@ -32,8 +32,20 @@ d = {}
 for k in fs.keys():
     d[k] = fs.getvalue(k)
 
+token = d['token']
+task1 = d['task']
+
+
+
+
 def download_file(path,key):
     try:
+        s3 = boto3.resource('s3',
+                            aws_access_key_id=aws_access_key_id,
+                            aws_secret_access_key=aws_secret_access_key,
+                            region_name=region_name,
+                            endpoint_url=endpoint_url)
+
         s3.Bucket(bucket).download_file(path+key, tempfolder+key)
         return tempfolder+key
     except botocore.exceptions.ClientError as e:
@@ -187,4 +199,3 @@ except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     print(exc_type, fname, exc_tb.tb_lineno)
-
