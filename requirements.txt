@@ -21,3 +21,4 @@ python-pptx
 pypdf 
 kaleido
 langchain 
+fitz
